@@ -1,6 +1,6 @@
 plugins {
-  id "mpern.sap.commerce.build" version "1.0.1"
-  id "mpern.sap.commerce.ccv1.package" version "1.0.1"
+  id "mpern.sap.commerce.build" version "1.0.2"
+  id "mpern.sap.commerce.ccv1.package" version "1.0.2"
 }
 //to avoid FQN in your task definitions, import the custom task classes
 import mpern.sap.commerce.build.tasks.HybrisAntTask
@@ -20,7 +20,7 @@ repositories {
 
 version = "1.0.0-SNAPSHOT"
 
-def hybrisVersion = "6.6.0.6"
+def hybrisVersion = "18.08.0"
 hybris {
     version = hybrisVersion
 }
@@ -50,22 +50,22 @@ dependencies {
 task downloadCommerce(type: SupportPortalDownload) {
     description "Download hybrisplatform zip file from SAP Support Portal"
     //URL to support portal file (as stated in wiki.hybris.com)
-    supportPortalUrl = "https://launchpad.support.sap.com/#/softwarecenter/template/products/_APP=00200682500000001943&_EVENT=DISPHIER&HEADER=Y&FUNCTIONBAR=N&EVENT=TREE&NE=NAVIGATE&ENR=73555000100200007322&V=MAINT"
+    supportPortalUrl = "https://launchpad.support.sap.com/#/softwarecenter/template/products/%20_APP=00200682500000001943&_EVENT=DISPHIER&HEADER=Y&FUNCTIONBAR=N&EVENT=TREE&NE=NAVIGATE&ENR=73555000100200008593&V=MAINT&TA=ACTUAL&PAGE=SEARCH/HYBRIS%20COMMERCE%201808"
     //S/I/D User, credentials are defined in gradle.properties
     username = supportUser
     password = supportPassword
     //download target
     targetFile = file("$platformFiles/hybris-commerce-suite-${hybrisVersion}.zip")
     //expected md5 hash (Available in support portal, Related Info -> Content Info)
-    md5Hash = "642fa9f3edd0ba0f9638b41129accff7"
+    md5Hash = "4467410a648e56198e91e30fb9d0549f"
 }
 task downloadDatahub(type: SupportPortalDownload) {
     description "Download datahub zip file from SAP Support Portal"
-    supportPortalUrl = "https://launchpad.support.sap.com/#/softwarecenter/template/products/_APP=00200682500000001943&_EVENT=DISPHIER&HEADER=Y&FUNCTIONBAR=N&EVENT=TREE&NE=NAVIGATE&ENR=73555000100200007323&V=MAINT"
+    supportPortalUrl = "https://launchpad.support.sap.com/#/softwarecenter/template/products/%20_APP=00200682500000001943&_EVENT=DISPHIER&HEADER=Y&FUNCTIONBAR=N&EVENT=TREE&NE=NAVIGATE&ENR=73555000100200008592&V=MAINT&TA=ACTUAL&PAGE=SEARCH/HYBRIS%20DATAHUB%201808"
     username = supportUser
     password = supportPassword
     targetFile = file("$platformFiles/hybris-commerce-datahub-${hybrisVersion}.zip")
-    md5Hash = "1fb50d7e3d186b10edfa646a686a9cca"
+    md5Hash = "e27f759fe0e1c47aafecac37d0f6e16d"
 }
 // task downloadTelco(type: SupportPortalDownload) {
 //     description "Download Telco & Media Accelerator zip file from SAP Support Portal"
