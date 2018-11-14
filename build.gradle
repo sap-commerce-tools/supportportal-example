@@ -1,6 +1,6 @@
 plugins {
-  id "mpern.sap.commerce.build" version "1.0.2"
-  id "mpern.sap.commerce.ccv1.package" version "1.0.2"
+  id "mpern.sap.commerce.build" version "1.2.0"
+  id "mpern.sap.commerce.ccv1.package" version "1.2.0"
 }
 //to avoid FQN in your task definitions, import the custom task classes
 import mpern.sap.commerce.build.tasks.HybrisAntTask
@@ -20,7 +20,7 @@ repositories {
 
 version = "1.0.0-SNAPSHOT"
 
-def hybrisVersion = "18.08.0"
+def hybrisVersion = "1808.2"
 hybris {
     version = hybrisVersion
 }
@@ -33,8 +33,8 @@ CCV1 {
 
 dependencies {
     //db drivers defined here are automatically downloaded and configured during bootstrapPlatform
-    dbDriver "mysql:mysql-connector-java:5.1.45"
-    hybrisPlatform "de.hybris.platform:hybris-commerce-suite:${hybrisVersion}@zip"
+    dbDriver "mysql:mysql-connector-java:5.1.47"
+
     //if you want to unpack additional artifacts during bootstrapPlatform, defined them here
     hybrisPlatform "de.hybris.platform:hybris-commerce-datahub:${hybrisVersion}@zip"
     // hybrisPlatform "de.hybris.platform:hybris-commerce-telco:${hybrisVersion}@zip"
@@ -57,7 +57,7 @@ task downloadCommerce(type: SupportPortalDownload) {
     //download target
     targetFile = file("$platformFiles/hybris-commerce-suite-${hybrisVersion}.zip")
     //expected md5 hash (Available in support portal, Related Info -> Content Info)
-    md5Hash = "4467410a648e56198e91e30fb9d0549f"
+    md5Hash = "2095d017c941bfa82c5eae7cca60eec3"
 }
 task downloadDatahub(type: SupportPortalDownload) {
     description "Download datahub zip file from SAP Support Portal"
@@ -65,7 +65,7 @@ task downloadDatahub(type: SupportPortalDownload) {
     username = supportUser
     password = supportPassword
     targetFile = file("$platformFiles/hybris-commerce-datahub-${hybrisVersion}.zip")
-    md5Hash = "e27f759fe0e1c47aafecac37d0f6e16d"
+    md5Hash = "b9a990c4d62df449fe58350388ad6a19"
 }
 // task downloadTelco(type: SupportPortalDownload) {
 //     description "Download Telco & Media Accelerator zip file from SAP Support Portal"
@@ -134,10 +134,10 @@ task setupDev {
 //here an example to run unit tests
 task unitTests(type: HybrisAntTask) {
     args("unittests")
-    systemProperty("testclasses.extensions", "training")
+    antProperty("testclasses.extensions", "training")
     //do NOT start hybris for unit tests, works for 6.4+
     //check https://jira.hybris.com/browse/ECP-1200
-    systemProperty("testclasses.suppress.junit.tenant", "true")
+    antProperty("testclasses.suppress.junit.tenant", "true")
     //we can also call other ant targets by prefexing the target name with `y`
     //because the plugin defines a task rule (check the output of 'gradle tasks')
     dependsOn tasks.getByPath("ybuild")
