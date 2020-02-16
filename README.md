@@ -1,3 +1,6 @@
+> **Archived on 2020-02-16**\
+> I recently switched jobs away from SAP Commerce development
+
 # Demo Project for hybris gradle plugins
 
 This project shows some usage examples for the SAP (Hybris) Commerce build plugin.
